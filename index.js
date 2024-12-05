@@ -37,6 +37,10 @@ const result = await reviewCollection.insertOne(review)
 res.send(result)
 })
 
+app.get('/reviews',async(req,res)=>{
+const cursor =await reviewCollection.find().toArray()
+res.send(cursor)
+})
 
 
 
