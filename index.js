@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors')
 const app = express()
 app.use(cors())
@@ -41,8 +41,20 @@ app.get('/reviews',async(req,res)=>{
 const cursor =await reviewCollection.find().toArray()
 res.send(cursor)
 })
+app.get('/reviews/:id',async(req,res)=>{
+  const id = req.params.id
+  console.log(id)
+  const query ={_id : new ObjectId(id)}
+  const result = await reviewCollection.findOne(query)
+  res.send(result)
 
-
+})
+app.get('/myReview/:email',async(req,res)=>{
+  const email = req.params.email
+  const query ={email : email}
+  const result = await reviewCollection.find(query).toArray()
+  res.send(result)
+})
 
 
 
