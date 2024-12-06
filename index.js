@@ -32,7 +32,6 @@ const reviewCollection =client.db('reviewDB').collection('review')
 
 app.post('/addReviews',async(req,res)=>{
 const review =req.body
-console.log(review)
 const result = await reviewCollection.insertOne(review)
 res.send(result)
 })
@@ -43,7 +42,6 @@ res.send(cursor)
 })
 app.get('/reviews/:id',async(req,res)=>{
   const id = req.params.id
-  console.log(id)
   const query ={_id : new ObjectId(id)}
   const result = await reviewCollection.findOne(query)
   res.send(result)
@@ -60,6 +58,27 @@ app.delete('/myReview/:id',async(req,res)=>{
  const query = {_id: new ObjectId(id)}
  const result = await reviewCollection.deleteOne(query)
  res.send(result)
+})
+app.patch('/updateReview/:id',async(req,res)=>{
+  const id = req.params.id
+  const review = req.body
+  const filter = {_id: new ObjectId(id)}
+  const options = {upsert:true}
+  const updateReview={
+    $set:{
+      name:review?.name,
+      email:review?.email,
+      GameCover:review?.GameCover,
+      genres:review?.genres,
+      rating:review?.rating,
+      publishYear:review?.publishYear,
+      description:review?.description,
+      gameName:review?.gameName,
+      
+    }
+  }
+const result =await reviewCollection.updateOne(filter,updateReview,options)
+res.send(result)
 })
 
 
