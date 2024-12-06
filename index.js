@@ -29,7 +29,10 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 const reviewCollection =client.db('reviewDB').collection('review')
+const watchListCollection =client.db('watchDB').collection('watchList')
 
+
+// review db start
 app.post('/addReviews',async(req,res)=>{
 const review =req.body
 const result = await reviewCollection.insertOne(review)
@@ -82,7 +85,13 @@ res.send(result)
 })
 
 
+// watchList db start 
 
+app.post('/watchList',async(req,res)=>{
+  const watchList =req.body
+  const result = await watchListCollection.insertOne(watchList)
+  res.send(result)
+})
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
