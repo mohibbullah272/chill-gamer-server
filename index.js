@@ -92,6 +92,13 @@ app.post('/watchList',async(req,res)=>{
   const result = await watchListCollection.insertOne(watchList)
   res.send(result)
 })
+app.get('/watchList/:email',async(req,res)=>{
+  const email = req.params.email
+  const query = {email : email}
+  const result = await watchListCollection.find(query).toArray()
+  res.send(result)
+})
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
