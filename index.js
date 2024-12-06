@@ -55,7 +55,12 @@ app.get('/myReview/:email',async(req,res)=>{
   const result = await reviewCollection.find(query).toArray()
   res.send(result)
 })
-
+app.delete('/myReview/:id',async(req,res)=>{
+  const id = req.params.id
+ const query = {_id: new ObjectId(id)}
+ const result = await reviewCollection.deleteOne(query)
+ res.send(result)
+})
 
 
 
