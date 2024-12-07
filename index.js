@@ -83,8 +83,23 @@ app.patch('/updateReview/:id',async(req,res)=>{
 const result =await reviewCollection.updateOne(filter,updateReview,options)
 res.send(result)
 })
+app.get('/topReview',async(req,res)=>{
+  const result = await reviewCollection.find().sort({rating:-1}).limit(6).toArray()
+  res.send(result)
+})
+app.get('/sortReviews',async(req,res)=>{
+  const methods =req.query.sortBy
+  let condition ={}
+  if(methods ==='rating'){
+     condition = {rating: -1}
+  }
+  if(methods==='publishYear'){
+    condition={publishYear:-1}
+  }
+  const result = await reviewCollection.find().sort(condition).toArray()
+  res.send(result)
 
-
+})
 // watchList db start 
 
 app.post('/watchList',async(req,res)=>{
