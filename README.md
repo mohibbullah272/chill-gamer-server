@@ -18,19 +18,7 @@ Chill Gamer is a game review-based platform where users can find honest reviews 
 - Database: MongoDB 
 - Authentication: JWT 
 - Cloud Storage:  Firebase 
-
-## 🛠️ Installation
-Prerequisites
-Install Node.js vXX.X.X or Python X.X (based on backend)
-Set up the database (MongoDB, PostgreSQL, etc.)
-Configure environment variables
-Steps
-sh
-Copy
-Edit
-# Clone the repository
-git clone https://github.com/yourusername/chill-gamer-server.git  
-cd chill-gamer-server  
+ 
 
 
 ## 📡 API Endpoints
